@@ -1,0 +1,198 @@
+---
+title: "09_Function"
+author: "Han"
+date: "2020/4/9"
+output: html_document
+---
+
+```{r}
+#print()
+x <- c(0.8933, 0.2344, 0.0764, 0.7736) 
+x.percent <- round(100*x, digits = 1) 
+x.show <- paste(x.percent, "%", sep = "") 
+print(x.show)
+#cat()
+cat(x.show) 
+x <- c("A", "B", "C", "D") 
+#print
+print(x)
+#cat()
+cat(x)
+#print()
+k <- 1 
+while(k < 100){ 
+  fac <- c() 
+  for(j in 1:k){ 
+    if((k %% j) == 0) 
+      fac <- c(fac, j) 
+  } 
+  if(k == sum(fac[-length(fac)])){ 
+    out <- paste(paste(k, "=", sep=" "), paste(fac[-length(fac)], collapse = " + "), sep = " ") 
+    print(out) 
+  }
+  k <- k+1 
+} 
+#cat()
+k <- 1 
+while(k < 100){ 
+  fac <- c() 
+  for(j in 1:k){ 
+    if((k %% j) == 0){ 
+      fac <- c(fac, j)
+    } 
+  } 
+  if(k == sum(fac[-length(fac)])){
+    cat(paste(k, "=", sep=" "), paste(fac[-length(fac)], collapse = " + "), "\n") 
+  } 
+  k <- k+1 
+} 
+#cat() without "\n"
+k <- 1 
+while(k < 100){ 
+  fac <- c() 
+  for(j in 1:k){ 
+    if((k %% j) == 0){
+      fac <- c(fac, j) 
+    } 
+  } 
+  if(k == sum(fac[-length(fac)])){
+    cat(paste(k, "=", sep=" "), paste(fac[-length(fac)], collapse = " + ")) 
+  } 
+  k <- k+1 
+}
+#function()
+f <- function(x){ 3*x + 2 } 
+f(2); f(3); f(4)
+make.percent <- function(x){ 
+  x.percent <- round(100*x, digits = 1) 
+  x.show <- paste(x.percent, "%", sep="")
+  cat(x.show) 
+} 
+make.percent(c(0.8933, 0.2344, 0.0764, 0.7736))
+#return()
+f <- function(x){ 
+  return(3*x + 2) 
+} 
+f(2) 
+f <- function(x){ 
+  res <- 3*x + 2 
+} 
+f(2)  #return nothing
+a <- f(2); a
+#percent by function() and return()
+make.percent <- function(x){ 
+  x.percent <- round(100*x, digits = 1) 
+  x.show <- paste(x.percent, "%", sep = "") 
+  return(x.show)  
+} 
+make.percent(c(0.8933, 0.2344, 0.0764, 0.7736))
+ans <- make.percent(c(0.8933, 0.2344, 0.0764, 0.7736)) 
+ans 
+# percent by function( ) and invisible( )
+make.percent <- function(x){
+  x.percent <- round(100*x, digits = 1) 
+  x.show <- paste(x.percent, "%", sep = "")
+  invisible(x.show) 
+} 
+make.percent(c(0.8933, 0.2344, 0.0764, 0.7736)) 
+ans <- make.percent(c(0.8933, 0.2344, 0.0764, 0.7736)) 
+ans
+objA <- function(x){
+  return(2*x) 
+} 
+objA 
+objA <- objA(4) 
+objA 
+#function()
+f <- function(x, y){ x^2 + y^2 } 
+f(2, 2); f(2, 3); f(2, 4)
+#percent digits
+make.percent <- function(x, x.digits){
+  x.percent <- round(100*x, digits = x.digits)
+  x.show <- paste(x.percent, "%", sep = "")
+  return(x.show) 
+}
+make.percent(c(0.8933, 0.2344, 0.0764, 0.7736), 0)
+make.percent(c(0.8933, 0.2344, 0.0764, 0.7736), 1)
+make.percent(c(0.8933, 0.2344, 0.0764, 0.7736), 2)
+#function_perfect number
+perfect.number <- function(a, b){
+  k <- a 
+  res <- c() 
+  while(k < b){
+    fac <- c() 
+    for(j in 1:k){
+      if((k %% j) == 0) fac <- c(fac, j) 
+      } 
+    if(k == sum(fac[-length(fac)])) { 
+      res <- c(res, k)}
+      k <- k+1 
+  } 
+  return(res) 
+} 
+perfect.number(10, 10000)
+#list()
+try.list <- list() 
+length(try.list)
+length(try.list) <- 2 # assign the size to the list 
+try.list[[1]] <- seq(0, 10, length.out = 3) # without name 
+try.list$square <- seq(0, 10, length.out = 3)^2 # with name 
+try.list
+try.list[[3]]
+names(try.list)
+length(try.list)
+#Extract an element from a list
+X <- list(a = 3, b = c(1,2,3,4,5), c = c("A", "B"))
+X
+X$a 
+X[[2]] 
+X[["c"]] 
+#perfect number use function() and list()
+perfect.number <- function(a, b){
+  k <- a 
+  res <- c()
+  ans <- list() 
+  while(k < b){
+    fac <- c() 
+    for(j in 1:k){
+      if((k %% j) == 0) fac <- c(fac, j) 
+    } 
+    if(k == sum(fac[-length(fac)])) { 
+      res <- c(res, k) 
+      ans[[paste(k)]] <- fac[-length(fac)] 
+    } 
+      k <- k+1 
+  } 
+  ans$number <- res 
+  return(ans) 
+}
+Ans <- perfect.number(1, 100) 
+Ans 
+Ans[["28"]] 
+#perfect number use invicible() to hide some output
+perfect.number <- function(a, b){
+  k <- a 
+  res <- c() 
+  ans <- list() 
+  while(k < b){
+    fac <- c() 
+    for(j in 1:k){
+      if((k %% j) == 0) fac <- c(fac, j) 
+    }
+    if(k == sum(fac[-length(fac)])) {
+      res <- c(res, k) 
+      ans[[paste(k)]] <- fac[-length(fac)] 
+    } 
+      k <- k+1 
+  } 
+  print(res) 
+  ans$number <- res 
+  return(invisible(ans)) 
+} 
+Ans <- perfect.number(1, 100)
+Ans 
+length(Ans)
+
+
+```
+
