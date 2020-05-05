@@ -1,0 +1,91 @@
+---
+title: '11'
+author: "Han"
+date: "2020/4/30"
+output: html_document
+---
+
+```{r}
+#dataframe
+colors <- c("red", "yellow", "blue")
+numbers <- c(1, 2, 3)
+colors.and.numbers<-data.frame(colors, numbers, more.numbers = c(4, 5, 6))
+colors.and.numbers
+#different from matrix
+X <- matrix(NA, 3, 3) 
+X[,1] <- c("red", "yellow", "blue") 
+X[,2] <- c(1, 2, 3) 
+X[,3] <- c(4, 5, 6) 
+colnames(X) <- c("colors", "numbers", "more.numbers") 
+X 
+#str()
+str(colors.and.numbers)
+#Change the type from factor to character by using stringAsFactors = FALSE.
+colors <- c("red", "yellow", "blue") 
+numbers <- c(1, 2, 3) 
+colors.and.numbers <- data.frame(colors, numbers, more.numbers = c(4, 5, 6), stringsAsFactors = FALSE) 
+str(colors.and.numbers)
+#rbind() cbind()
+data1 <- data.frame(colors, numbers, more.numbers = c(4, 5, 6)) 
+data1 <- rbind(data1, c("black", 3, 5))
+data1
+#stringsAsFactors=FALSE
+data2 <- data.frame(colors, numbers, more.numbers = c(4, 5, 6), stringsAsFactors = FALSE) 
+data2 <- rbind(data2, c("black", 3, 5)) 
+data2
+str(data2)
+#comparison of two types
+str(data1)
+str(data2)
+#add column:use $ or cbind() row:rbind()
+colors <- c("red", "yellow", "blue") 
+number1 <- c(1, 2, 3) 
+number2 <- c(10, 11, 12) 
+colors.and.numbers <- data.frame(colors, number1)
+colors.and.numbers$more.numbers <- c(4, 5, 6) 
+colors.and.numbers <- cbind(colors.and.numbers, number2) 
+colors.and.numbers
+#save and load the objects
+X <- seq(0, 10, 0.1) 
+A <- 3 
+B <- mean(X) 
+dump(list = objects(), file = "all.R") 
+dump(c("A", "X"), file = "parts.R") 
+#To retrieve the objects in a future session, type source(“XXX.R”) 
+source("all.R") 
+source("parts.R")
+#To save all objects in the current workspace, type save.image(“XXX.RData”). 
+#To save parts of objects, type save(a, b, c, ﬁle = “XXX.RData”). 
+#Use load(“XXX.RData”) to retrieve data. 
+X <- seq(0, 10, 0.1)
+A <- 3 
+B <- mean(X) 
+save.image("all.RData") 
+load("all.RData")
+#write.table(A,file="XXX.txt) write.csv(A.file="XXX.csv")
+colors <- c("red", "yellow", "blue") 
+numbers <- c(1, 2, 3) 
+X <- data.frame(colors, numbers, more.numbers = c(4, 5, 6))
+write.table(X, "matrix.txt") 
+write.csv(X, "matrix.csv")
+#read.table(file="XXX.txt) read.csv("XXX.csv")
+X1 <- read.table("matrix.txt") 
+X2 <- read.csv("matrix.csv")
+#download a package:install.packages("XXX")
+#call the package:library(XXX)
+#install.packages("data.table")
+#library(data.table) 
+#fread() similar to read.table()
+#input <- fread("http://www.stats.ox.ac.uk/pub/datasets/csb/ch11b.dat" )
+#head(input)
+#online help
+#help() or ?name
+help(mean)
+?median
+#built in examples example()
+example(mean)
+#Only knowing a keyword if function
+help.search("optimization")
+
+```
+

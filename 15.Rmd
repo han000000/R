@@ -1,0 +1,94 @@
+---
+title: '15'
+author: "Han"
+date: "2020/5/1"
+output: html_document
+---
+
+```{r}
+#apply(X,MARGIN,FUN,...)
+#X:array or matrix (or a data frame)
+#MARGIN:for a matrix 1 indicates rows,2 indicates colomns
+#FUN:name of a function
+A<- matrix(rnorm(1500),500,3)
+#sum of each row
+apply(A,1,sum);rowSums(A)
+#sum of each column
+apply(A,2,sum);colSums(A)
+#create a function
+row.col.sum <- function(X, margin = 1){
+  size <- dim(X) 
+  if(margin == 1){ 
+    res <- c() 
+    for(j in 1:size[1]){
+      res <- c(res, sum(X[j,]))
+    } 
+  }else if(margin == 2){
+    res <- c()
+    for(j in 1:size[2]){
+      res <- c(res, sum(X[,j]))
+    }
+  }else{ 
+    stop("margin should be either 1 or 2.")
+  } 
+  return(res) 
+} 
+#check time-efficiency
+library(rbenchmark)
+benchmark(replications=rep(1000,1),
+          apply(A,1,sum),rowSums(A),row.col.sum(A,1),colums=c("test","elapsed","relative"))
+#if there are NA
+B <- matrix(sample(1:100, 15), 5, 3) 
+B[1, 2] <- NA 
+B[3, 1] <- NA 
+B <- data.frame(B) 
+colnames(B) <- c("factor 1", "factor 2", "factor 3") 
+apply(B, 2, mean)
+#mean(...,na.rm=TRUE)
+apply(B, 2, mean, na.rm = TRUE)
+apply(B, 2, max) 
+apply(B, 2, min, na.rm = TRUE)
+#improving the function
+row.col.sum.ver2 <- function(X, margin = 1){
+  size <- dim(X) 
+  if(margin == 1){
+    res <- rep(NA, size[1]) 
+    for(j in 1:size[1]){
+      res[j] <- sum(X[j,])
+    }
+  }else if(margin == 2){
+    res <- rep(NA, size[2]) 
+    for(j in 1:size[2]){
+      res[j] <- sum(X[, j]) 
+    } 
+  }else{ 
+    stop("margin should be either 1 or 2.") 
+  }
+  return(res)
+}
+##check time-efficiency
+library(rbenchmark) 
+benchmark(replications=rep(1000, 1), apply(A, 1, sum), rowSums(A), row.col.sum(A, 1), columns=c('test', 'elapsed', 'relative'))
+#lapply(X,FUN,...)
+#X:vector or data frame or list
+#FUN:name of a function
+C <- list(a = 1:10, beta = exp(-3:3))
+# Error in apply(C, FUN = mean): dim(X) must have a positive length 
+lapply(C, mean)
+par(mfrow = c(1, 2)) 
+lapply(C, hist)
+#sapply(X,FUN,...,simplify=TRUE)
+#X:vector or a data frame or list
+#FUN:name of a function
+#simplify:logical;TRUE will return an array or a matrix with the same length of output
+sapply(C, summary)
+sapply(C, summary, simplify = FALSE)
+lapply(C, summary)
+#if there are different length in the result
+D <- list(a = sample(1:10, 10, replace = TRUE), b = sample(1:5, 20, replace = TRUE)) 
+sapply(D, unique)
+sapply(D, table)
+
+
+```
+

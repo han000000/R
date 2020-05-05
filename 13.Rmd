@@ -1,0 +1,167 @@
+---
+title: '13'
+author: "Han"
+date: "2020/5/1"
+output: html_document
+---
+
+```{r}
+#Histogram: hist(x)
+#Boxplot: boxplot(x)
+#Density plot: plot(density(x))
+x.norm <- rnorm(100, mean=0, sd=1) 
+hist(x.norm)
+boxplot(x.norm)
+plot(density(x.norm))
+#Barchart: barplot(x)
+#Piechart: pie(x) 
+x <- sample(c(1:8), 100, replace=TRUE, prob=c(8:1)) 
+x <- table(x) 
+names(x) <- c("A", "B", "C", "D", "E", "F", "G", "H") 
+barplot(x)
+pie(x)
+x <- rnorm(100) 
+y <- 3*x + rnorm(100, 0, 1) 
+plot(x, y)
+cor(x,y)
+#pairs()
+X <- matrix(rnorm(30), 10, 3) #matrix
+pairs(X, pch = 19)
+ #matrix
+X <- matrix(rnorm(50), 10, 5)
+boxplot(X)
+#dataframe
+X <- data.frame(group = rep(c("A", "B", "C", "D", "E"), each = 10), res = rnorm(50)) 
+boxplot(res ~ group, data = X)
+#plot(x, y,
+#     type = "p", # types of the plot
+#     pch = , # the symbol in the plot
+#     main = NULL, # the title of the plot 
+#     lty = , # the style of a line 
+#     lwd = , # the width of a line 
+#     cex = , # the size of an text 
+#     bty="o", # the box around the plot 
+#     col = , # the color of an object 
+#     xlim = NULL, ylim = NULL, # the range of an axis 
+#     sub = NULL, # the sub-title of the plot xlab = NULL, ylab = NULL, # the name of an axis 
+#     cex.main = # the size of the title )
+type = c("p", "l", "b", "s", "o", "h", "n") 
+#"p":point, "l":lines, "b":both points and lines, "o":line pass through points, "h":the lines between points and x-axis, "n":no cintent in the plot but plot region""
+print("")
+par(mfrow = c(2,3)) # split plot ranges 
+plot(x, y, type = "p", main = "p") 
+plot(x, y, type = "l", main = "l") 
+plot(x, y, type = "b", main = "b") 
+plot(x, y, type = "o", main = "o") 
+plot(x, y, type = "h", main = "h") 
+plot(x, y, type = "n", main = "n")
+pch = c(1:25, "*", ".", "o", "O", "0", "+", "-", "|", "%", "#")
+par(mfrow = c(2,3)) # split plot ranges 
+plot(x, y, pch = 1, main = "pch = 1") 
+plot(x, y, pch = 3, main = "pch = 3", cex.main = 2) 
+plot(x, y, pch = 10, main = "pch = 10", cex.axis = 2) 
+plot(x, y, pch = 15, main = "pch = 15", cex = 2, cex.main = 2) 
+plot(x, y, pch = 19, main = "pch = 19", cex = 2, cex.axis = 2) 
+plot(x, y, pch = "#", main = "pch = #", cex = 2, cex.axis = 2, cex.lab = 2, cex.main = 2)
+t <- 1:20 
+y <- rnorm(20)
+par(mfrow = c(2,3)) # split plot ranges 
+plot(t, y, type = "l") 
+plot(t, y, type = "l", lty = 2) 
+plot(t, y, type = "l", lty = 2, lwd = 2) 
+plot(t, y, type = "l", lty = 3, lwd = 2) 
+plot(t, y, type = "l", lty = 4, lwd = 2) 
+plot(t, y, type = "l", lty = 5, lwd = 2)
+bty = c("o", "n", "7", "L", "C", "U") 
+t <- 1:20
+y <- rnorm(20)
+par(mfrow = c(2,3)) # split plot ranges 
+plot(t, y, type = "l", bty = "o", main = "bty = \" o \"") 
+plot(t, y, type = "l", bty = "n", main = "bty = \" n \"") 
+plot(t, y, type = "l", bty = "7", main = "bty = \" 7 \"") 
+plot(t, y, type = "l", bty = "L", main = "bty = \" L \"") 
+plot(t, y, type = "l", bty = "C", main = "bty = \" C \"") 
+plot(t, y, type = "l", bty = "U", main = "bty = \" U \"")
+t <- 1:20 
+y <- rnorm(20)
+par(mfrow = c(2,3)) # split plot ranges 
+plot(t, y, type = "l", col = 1) 
+plot(t, y, type = "l", col = 2) 
+plot(t, y, type = "l", col = "green") 
+plot(t, y, type = "l", col = "grey") 
+plot(t, y, type = "l", col = "#009999") 
+plot(t, y, type = "l", col = "#0000FF")
+t <- 1:20 
+y <- rnorm(20)
+par(mfrow = c(2,3)) # split plot ranges 
+plot(t, y, type = "l") 
+plot(t, y, type = "l", main = "Time series") 
+plot(t, y, type = "l", main = "Time series", sub = "this year") 
+plot(t, y, type = "l", main = "Time series", xlab = "time") 
+plot(t, y, type = "l", main = "Time series", xlab = "time", ylab = "") 
+plot(t, y, type = "l", main = "Time series", xlab = "time", ylab = "return")
+t <- 1:20
+y <- rnorm(20)
+par(mfrow = c(2,2)) # split plot ranges 
+plot(t, y, type = "b") 
+plot(t, y, type = "b", xlim = c(0, 50)) 
+plot(t, y, type = "b", ylim = c(-5, 5)) 
+plot(t, y, type = "b", xlim = c(0, 50), ylim = c(-5, 5))
+par(mfrow = c(2, 3)) 
+curve(exp(-x), 0, 10)
+curve(dnorm(x), -10, 10) 
+curve(x^2, -10, 10) 
+curve(sin, 0, 10) 
+curve(3*exp(-3*x), 0, 6) 
+curve(5*x+2, 0, 10)
+#points(), lines(), abline():y=a+bx
+plot(t, y, type = "b") 
+abline(h = 0) 
+abline(v = 15, lty = 2, col = 8, lwd = 2) 
+points(t[15], y[15], pch = 19, col = 2)
+x <- rnorm(50) 
+y <- 3*x + rnorm(50, 0, 1)
+y1 <- 5*x + rnorm(50, 0, 2)
+plot(x, y, type = "p", pch = 19) 
+abline(a = 0, b = 3)
+points(x, y1, col = 4, pch = 20) 
+abline(a = 0, b = 5, col = 4)
+#Add text
+x <- rnorm(50) 
+y <- 3*x + rnorm(50, 0, 1) 
+y1 <- 5*x + rnorm(50, 0, 2)
+plot(x, y, type = "p", pch = 19) 
+abline(a = 0, b = 3)
+points(x, y1, col = 4, pch = 20) 
+abline(a = 0, b = 5, col = 4)
+text(-1.5, 2, "A", cex = 5) 
+text(1, -5, "B", cex = 5, col = 2) 
+legend("topleft", c("Y", "Y1"), col = c(1,4), lty = c(1, 1), cex = 2)
+#re-arrange the region of a figure
+x <- rnorm(50) 
+y <- 3*x + rnorm(50, 0, 1) 
+y1 <- 5*x + rnorm(50, 0, 2)
+par(mfrow = c(1, 1), mar = c(0.5, 0.5, 0.5, 0.5))
+plot(x, y, type = "p", pch = 19) 
+abline(a = 0, b = 3)
+points(x, y1, col = 4, pch = 20) 
+abline(a = 0, b = 5, col = 4)
+text(-1.5, 2, "A", cex = 5)
+text(1, -5, "B", cex = 5, col = 2) 
+legend("topleft", c("Y", "Y1"), col = c(1,4), lty = c(1, 1), cex = 2)
+#layout(matrix(c(1,2,3,3),2,2,byrow=TRUE)
+x <- rnorm(50) 
+y <- 3*x + rnorm(50, 0, 1) 
+y1 <- 5*x + rnorm(50, 0, 2)
+y2 <- -2*x + rnorm(50, 0, 2)
+layout(matrix(c(1,2,3,3), 2, 2, byrow=TRUE)) 
+plot(x, y, type = "p", pch = 19, main = "Y") 
+abline(a = 0, b = 3) 
+plot(x, y1, type = "p", pch = 19, main = "Y1") 
+abline(a = 0, b = 5) 
+plot(x, y2, type = "p", pch = 19, main = "Y2") 
+abline(a = 0, b = -2)
+
+
+
+```
